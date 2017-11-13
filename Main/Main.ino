@@ -24,11 +24,14 @@
  */
 
 #include "Configuration.h"
-#include "Run.h"
+#include "Running.h"
 
 
 char inData[8];
 int index = 0;
+
+// setup running class
+Running running(0);
 
 void setup()
 {
@@ -140,15 +143,15 @@ void readCommand(){
     case(1): // Relay On
       relay = getRelay(value);
       if(relay == -1) break;
-      toggleRelay(relay, true);
+      running.toggleRelay(relay, true);
       break;
     case(2): // Relay Off
       relay = getRelay(value);
       if(relay == -1) break;
-      toggleRelay(relay, false);
+      running.toggleRelay(relay, false);
       break;
     case(3): // Set PWM
-      setMotorSpeed(value);
+      running.setMotorSpeed(value);
       break;
   }
   // if not status command return command for confirmation
@@ -179,22 +182,22 @@ void getStatus(int item){
   int value;
   switch(item){
     case(1):
-      value = (int) hornState;
+      value = (int) running.hornState;
       break;
     case(2):
-      value = (int) lightState;
+      value = (int) running.lightState;
       break;
     case(3):
-      value = (int) strobeState;
+      value = (int) running.strobeState;
       break;
     case(4):
-      value = (int) hitchState;
+      value = (int) running.hitchState;
       break;
     case(5):
-      value = (int) motorLState;
+      value = (int) running.motorLState;
       break;
     case(6):
-      value = (int) motorRState;
+      value = (int) running.motorRState;
       break;
     default:
       value = -1;
@@ -235,7 +238,7 @@ void checkSerial(){
 void loop()
 {
   // run loop
-  run.loop_();
+  running.loop_();
   // check for commands
   checkSerial();
 }

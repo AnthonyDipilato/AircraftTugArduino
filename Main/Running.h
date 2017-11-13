@@ -4,15 +4,15 @@
  *  
  */
 
-#ifndef Run_h
-#define Run_h
+#ifndef Running_h
+#define Running_h
 
 #include "Arduino.h"
 
-class Run
+class Running
 {
   public:
-    Run(int test);
+    Running(int test);
     void loop_();
     void setMotor(int motor, int percent);
     void toggleRelay(int relay, boolean state);
