@@ -23,25 +23,25 @@ Commands received in format:
 [Command][Address][Value][Newline]
 
 Commands
-| Code 	| Item			|
-| ---  	| ---			|
-| 0	| Status		|
-| 1	| Relay On  		|
-| 2	| Relay Off		|
-| 3	| Set PWM		|
-| 4	| Motor Direction	|
+| Code | Item |
+| --- | --- |
+| 0	| status |
+| 1	| Relay On |
+| 2	| Relay Off |
+| 3	| Set PWM |
+| 4	| Motor Direction |
 
 
 Addresses
-| Address	| Item			|
-| ---		| ---			|
-| 0		| All (status only)	|
-| 1		| Horn			|
-| 2		| Flood Lights		|
-| 3		| Warning Strobe	|
-| 4		| Wheel Hitch		|
-| 5		| Left Motor		|
-| 6		| Right Motor		|
+| Address | Item |
+| --- | ---	|
+| 0 | All (status only) |
+| 1 | Horn |
+| 2 | Flood Lights |
+| 3 | Warning Strobe |
+| 4 | Wheel Hitch |
+| 5 | Left Motor |
+| 6 | Right Motor |
 
 Values for motor direction:
 0 - Stop
