@@ -20,13 +20,13 @@ Relays:
 - Actuator for wheel hitch
 
 Commands received in format:
-[Command][Address][Value][Newline]
+[Command],[Address],[Value][Newline]
 
 Commands
 
 | Code | Item |
 | --- | --- |
-| 0	| status |
+| 0	| Status |
 | 1	| Relay On |
 | 2	| Relay Off |
 | 3	| Set PWM |
@@ -46,6 +46,7 @@ Addresses
 | 6 | Right Motor |
 
 Values for motor direction:
+
 0 - Stop
 1 - Forward
 2 - Reverse
