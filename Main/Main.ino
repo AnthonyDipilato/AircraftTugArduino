@@ -23,7 +23,8 @@
  *   
  */
 
-#include "configuration.h"
+#include "Configuration.h"
+#include "Run.h"
 
 
 char inData[8];
@@ -233,9 +234,10 @@ void checkSerial(){
 
 void loop()
 {
-
+  // run loop
+  run.loop_();
+  // check for commands
   checkSerial();
-  
 }
 
 
