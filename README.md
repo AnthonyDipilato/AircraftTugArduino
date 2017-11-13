@@ -23,6 +23,7 @@ Commands received in format:
 [Command][Address][Value][Newline]
 
 Commands
+
 | Code | Item |
 | --- | --- |
 | 0	| status |
@@ -33,6 +34,7 @@ Commands
 
 
 Addresses
+
 | Address | Item |
 | --- | ---	|
 | 0 | All (status only) |
