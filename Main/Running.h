@@ -4,19 +4,26 @@
  *  
  */
 
+
+
 #ifndef Running_h
 #define Running_h
 
 #include "Arduino.h"
 
+
 class Running
 {
   public:
-    Running(int test);
+    Running();
     void loop_();
     void setMotor(int motor, int percent);
     void toggleRelay(int relay, boolean state);
     void motorCheck(); // safety check to prevent runaway tug
+    void hornCheck();
+    void setMotorSpeed(int address, int value);
+    void setMotorDirection(int address, int value); 
+    void allStop();
 
     int motorLPercent;
     int motorLDirection;
@@ -32,9 +39,12 @@ class Running
     int motorLState;
     int motorRState;
 
-    unsigned long lastCheck;
     unsigned long lastUpdateL;
     unsigned long lastUpdateR;
+    unsigned long hornStart;
+    unsigned long currentTime;
+
+    byte outputValue;
     
   private:
     int none;

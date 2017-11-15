@@ -31,7 +31,7 @@ char inData[8];
 int index = 0;
 
 // setup running class
-Running running(0);
+Running running;
 
 void setup()
 {
@@ -116,6 +116,7 @@ int getAddress(int relay){
  *    1 - Relay On
  *    2 - Relay Off
  *    3 - Set PWM
+ *    4 - All Stop
  */
 
 void readCommand(){
@@ -151,7 +152,10 @@ void readCommand(){
       running.toggleRelay(relay, false);
       break;
     case(3): // Set PWM
-      running.setMotorSpeed(value);
+      running.setMotorSpeed(address,value);
+      break;
+    case(4): // All Stop
+      running.allStop();
       break;
   }
   // if not status command return command for confirmation
@@ -223,7 +227,6 @@ void checkSerial(){
       }
     }
 
-  
     boolean response = false;
     while(Serial.available() > 0){
        response = true;
