@@ -108,6 +108,7 @@ void Running::hornCheck(){ // because a sticky horn could get annoying
 
 void Running::loop_(){
   currentTime = millis();
-  // TODO motor safety check
+  motorCheck();
+  hornCheck();
 }
 
