@@ -30,9 +30,9 @@
 
 // Horn timeout
 // horn works on momentary button timeout prevents sticky buttons on disconnect
-#define HORN_TIMEOUT          1000 // no reason for a constant horn blast longer than a second
+#define HORN_TIMEOUT          2000 
 
-// Debounce delay for checking buttons
+// Debounce delay for checking comands
 #define DEBOUNCE_DELAY        100
 // Command Addresses
 // Relays

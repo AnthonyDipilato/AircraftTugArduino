@@ -26,9 +26,7 @@ class Running
     void allStop();
 
     int motorLPercent;
-    int motorLDirection;
     int motorRPercent;
-    int motorRDirection;
 
     // booleans for relay states
     boolean hornState;

@@ -68,6 +68,8 @@ void setup()
 
 // Get relay from address
 int getRelay(int address){
+  Serial.print("get relay: ");
+  Serial.println(address);
   int relay;
   switch (address) {
     case 1:
@@ -81,6 +83,7 @@ int getRelay(int address){
       break;
     case 4:
       relay = RELAY_HITCH;
+      break;
     default:
       relay = -1;
       break;
@@ -128,6 +131,12 @@ void readCommand(){
   items = strtok(NULL,",");   // call strtok agin for next token value
   int value = atoi(items);    // value for command
   int relay;
+  Serial.print("command: ");
+  Serial.println(command);
+  Serial.print("address: ");
+  Serial.println(address);
+  Serial.print("value: ");
+  Serial.println(value);
   // redirect to command action
   switch(command){
     case(0): // Status
@@ -140,15 +149,22 @@ void readCommand(){
         }else{
           getStatus(address);
         }
+        break;
       }
     case(1): // Relay On
-      relay = getRelay(value);
-      if(relay == -1) break;
+      relay = getRelay(address);
+      Serial.print("Relay: ");
+      Serial.println(relay);
+      if(relay == -1){
+        break;
+      }
       running.toggleRelay(relay, true);
       break;
     case(2): // Relay Off
-      relay = getRelay(value);
-      if(relay == -1) break;
+      relay = getRelay(address);
+      if(relay == -1){
+        break;
+      }
       running.toggleRelay(relay, false);
       break;
     case(3): // Set PWM
@@ -226,16 +242,6 @@ void checkSerial(){
         index = 0;
       }
     }
-
-    boolean response = false;
-    while(Serial.available() > 0){
-       response = true;
-       char input = Serial.read();
-       Serial.print(input);
-    }
-    if(response)
-      Serial.println("-");
-    
 }
 
 void loop()
