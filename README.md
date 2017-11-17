@@ -1,28 +1,25 @@
-Aircraft Tug
-Written by Anthony DiPilato
-
+# Aircraft Tug
 This project is for the small aircraft tug that I built.
 You can see the build log and details at URL
 
 The arduino acts as slave to the iOS app. The source for the app can be found at URL
 
-Inputs:
+### Inputs
 - iOS commands via bluetooth HC-08
 
-Output:
+### Output
 - 4 relays
 - PWM pins for dual channel h-bridge to control motors
 
-Relays:
+### Relays 
 - Horn
 - Flood Lights
 - Warning Strobe
 - Actuator for wheel hitch
 
+### Commands
 Commands received in format:
 [Command],[Address],[Value][Newline]
-
-Commands
 
 | Code | Item |
 | --- | --- |
@@ -33,7 +30,7 @@ Commands
 | 4	| Motor Direction |
 
 
-Addresses
+### Addresses
 
 | Address | Item |
 | --- | ---	|
@@ -50,3 +47,9 @@ Values for motor direction:
 0 - Stop
 1 - Forward
 2 - Reverse
+
+### Author
+Anthony DiPilato, anthony@bumbol.com
+
+### License
+All code is available under the MIT license. See LICENSE file for info.
