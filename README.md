@@ -19,7 +19,9 @@ The arduino acts as slave to the iOS app. The source for the app can be found at
 
 ### Commands
 Commands received in format:
+```
 [Command],[Address],[Value][Newline]
+```
 
 | Code | Item |
 | --- | --- |
@@ -43,10 +45,11 @@ Commands received in format:
 | 6 | Right Motor |
 
 Values for motor direction:
-
+```
 0 - Stop
 1 - Forward
 2 - Reverse
+```
 
 ### Author
 Anthony DiPilato, anthony@bumbol.com
