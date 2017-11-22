@@ -139,12 +139,6 @@ void readCommand(){
   items = strtok(NULL,",");   // call strtok agin for next token value
   int value = atoi(items);    // value for command
   int relay;
-  Serial.print("command: ");
-  Serial.println(command);
-  Serial.print("address: ");
-  Serial.println(address);
-  Serial.print("value: ");
-  Serial.println(value);
   // redirect to command action
   switch(command){
     case(0): // Status
@@ -176,7 +170,7 @@ void readCommand(){
       running.toggleRelay(relay, false);
       break;
     case(3): // Set PWM
-      running.setMotorSpeed(address,value);
+      running.setTargetSpeed(address,value);
       break;
     case(4): // All Stop
       running.allStop();
@@ -221,11 +215,11 @@ void getStatus(int item){
     case(4):
       value = (int) running.hitchState;
       break;
-    case(5):
-      value = (int) running.motorLState;
+    case(MOTOR_R_ADDRESS):
+      value = (int) running.currentSpeedR;
       break;
-    case(6):
-      value = (int) running.motorRState;
+    case(MOTOR_L_ADDRESS):
+      value = (int) running.currentSpeedL;
       break;
     default:
       value = -1;

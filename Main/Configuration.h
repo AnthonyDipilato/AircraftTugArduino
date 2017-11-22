@@ -22,6 +22,14 @@
 #define MOTOR_R_EN1           30
 #define MOTOR_R_EN2           32
 
+// Motor Addresses
+#define MOTOR_R_ADDRESS       5
+#define MOTOR_L_ADDRESS       6
+
+// Motor Softening
+// Higher the number the slower the acceleration
+#define MOTOR_DELAY           100
+#define MOTOR_INCREMENT       10
 
 
 // Motor safety cuttoff
