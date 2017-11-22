@@ -52,58 +52,60 @@ void Running::toggleRelay(int relay, boolean state){
     digitalWrite(relay, LOW); // LOW is on
   }else{
     Serial.println("OFF");
-    digitalWrite(relay,HIGH); // HIGH is off
+    digitalWrite(relay, HIGH); // HIGH is off
   }
 }
 
-void Running::setMotorDirection(int address, int value){
-    Serial.println("setMotorDirection()");
-    Serial.print("address: ");
-    Serial.println(address);
-    int c1 = 0;
-    int c2 = 0;
-    // if not forward or backward apply brakes (0,0)
-    if(value > 0){
-      Serial.println("forward");
-      c1 = 1;
-    }
-    else if(value < 0){
-      Serial.println("backward");
-      c2 = 1;
-    }
-    // left motor
-    if(address == 5){
-      digitalWrite(MOTOR_L_C1, c1);
-      digitalWrite(MOTOR_L_C2, c2);
-      lastUpdateL = currentTime;
-      Serial.print("updateL: ");
-      Serial.println(lastUpdateL);
-      
-    }
-    // right motor
-    else if(address == 6){
-      digitalWrite(MOTOR_R_C1, c1);
-      digitalWrite(MOTOR_R_C2, c2);
-      lastUpdateR = currentTime;
-    }
+
+byte Running::getOutputValue(int value){
+  Serial.println("getOutputValue()");
+  float output;
+  value = abs(value);
+  Serial.print("Value: ");
+  Serial.println(value);
+  if(value > 100) value = 100;
+  output = ((float) value / 100) * 255;
+  Serial.print("Output: ");
+  return (byte) output;
 }
 
 void Running::setMotorSpeed(int address, int value){
   Serial.println("setMotorSpeed()");
-  float output;
-  // set motor direction
-  setMotorDirection(address, value);
-  value  = abs(value);
-  if(value > 100) value = 100;
-  output = ((float) value / 100) * 255;
-  outputValue = (byte) output;
+  byte output = getOutputValue(value);
+  int motor1; int motor2;
   // 5 is left 6 is right
   if(address == 5){
+    motor1 = MOTOR_L_PWM1;
+    motor2 = MOTOR_L_PWM2;
     motorLPercent = value;
-    analogWrite(MOTOR_L_PWM, outputValue);
-  }else if(address == 6){
+    lastUpdateL = currentTime;
+  }
+  else if(address == 6){
+    motor1 = MOTOR_R_PWM1;
+    motor2 = MOTOR_R_PWM2;
     motorRPercent = value;
-    analogWrite(MOTOR_R_PWM, outputValue);
+    lastUpdateR = currentTime;
+  }
+  else{ // invalid address
+    return;
+  }
+  // check if forward of reverse
+  if(value > 0){
+    analogWrite(motor1, output);
+    analogWrite(motor2, 0);
+    Serial.print("analogWrite(");
+    Serial.print(motor1);
+    Serial.print(", ");
+    Serial.print(output);
+    Serial.println(");");
+  }
+  else if(value < 0 ){
+    analogWrite(motor2, output);
+    analogWrite(motor1, 0);
+  }
+  else{
+    analogWrite(motor1, 0);
+    analogWrite(motor2, 0);
   }
 }
 
@@ -125,7 +127,6 @@ void Running::motorCheck(){ // safety function to avoid runaway motors
     Serial.println("Stop Left");
     setMotorSpeed(5, 0);
   }
-    
 }
 
 void Running::hornCheck(){ // because a sticky horn could get annoying

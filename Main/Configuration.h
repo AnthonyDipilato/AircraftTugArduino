@@ -1,4 +1,4 @@
-/*    Aircraft Tug Configuration
+    /*    Aircraft Tug Configuration
  *   
  *    Settings and pin configurations
  *  
@@ -8,20 +8,21 @@
 #define configuration_h
 
 // Relays
-#define RELAY_HORN            23
-#define RELAY_LIGHTS          25
-#define RELAY_STROBE          27
-#define RELAY_HITCH           29
+#define RELAY_HORN            47
+#define RELAY_LIGHTS          49
+#define RELAY_STROBE          51
+#define RELAY_HITCH           53
 // H-Bridge
-#define MOTOR_L_C1            47
-#define MOTOR_L_C2            49
-#define MOTOR_L_PWM           2
-#define MOTOR_R_C1            51
-#define MOTOR_R_C2            53
-#define MOTOR_R_PWM           3
+#define MOTOR_L_PWM1          11
+#define MOTOR_L_PWM2          12
+#define MOTOR_L_EN1           26
+#define MOTOR_L_EN2           28
+#define MOTOR_R_PWM1          9
+#define MOTOR_R_PWM2          10
+#define MOTOR_R_EN1           30
+#define MOTOR_R_EN2           32
 
-// Min pwm percent for motor running
-#define PWM_MIN               85
+
 
 // Motor safety cuttoff
 // Time between commands to reset motors to 0

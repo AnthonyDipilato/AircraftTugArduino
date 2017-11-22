@@ -24,6 +24,7 @@ class Running
     void setMotorSpeed(int address, int value);
     void setMotorDirection(int address, int value); 
     void allStop();
+    byte getOutputValue(int value);
 
     int motorLPercent;
     int motorRPercent;

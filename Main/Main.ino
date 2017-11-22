@@ -35,35 +35,43 @@ Running running;
 
 void setup()
 {
+
   // Serial output for debugging and bluetooth module
-  Serial.begin(9600);
+  Serial.begin(9600); // USB for debugging
+  Serial1.begin(9600); // Bluetooth
+  // Set timers for PWM H-Bridge maxes at 25KHz so we will set 3.92KHz
+  TCCR1B = (TCCR2B & 0b11111000) | 0x02;
+  TCCR2B = (TCCR2B & 0b11111000) | 0x02;
   // Relays Pins
   pinMode(RELAY_HORN,   OUTPUT); 
   pinMode(RELAY_LIGHTS, OUTPUT); 
   pinMode(RELAY_STROBE, OUTPUT); 
   pinMode(RELAY_HITCH,  OUTPUT);
   // H-Bridge Pins
-  pinMode(MOTOR_L_C1,   OUTPUT); 
-  pinMode(MOTOR_L_C2,   OUTPUT); 
-  pinMode(MOTOR_L_PWM,  OUTPUT); 
-  pinMode(MOTOR_R_C1,   OUTPUT);
-  pinMode(MOTOR_R_C2,   OUTPUT);
-  pinMode(MOTOR_R_PWM,  OUTPUT);
+  pinMode(MOTOR_L_PWM1,   OUTPUT); 
+  pinMode(MOTOR_L_PWM2,   OUTPUT); 
+  pinMode(MOTOR_L_EN1,  OUTPUT); 
+  pinMode(MOTOR_L_EN2,  OUTPUT); 
+  pinMode(MOTOR_R_PWM1,   OUTPUT);
+  pinMode(MOTOR_R_PWM2,   OUTPUT);
+  pinMode(MOTOR_R_EN1,  OUTPUT);
+  pinMode(MOTOR_R_EN2,  OUTPUT);
   // Initialize relays (HIGH is off)
   digitalWrite(RELAY_HORN,    HIGH);
   digitalWrite(RELAY_LIGHTS,  HIGH);
   digitalWrite(RELAY_STROBE,  HIGH);
   digitalWrite(RELAY_HITCH,   HIGH);
   // Initialize H-Bridge
-  // C pins control direction
-  // C1,C2 = HIGH,HIGH stop LOW,HIGH forward HIGH,LOW reverse
-  digitalWrite(MOTOR_L_C1,    HIGH);
-  digitalWrite(MOTOR_L_C2,    HIGH);
-  digitalWrite(MOTOR_R_C1,    HIGH);
-  digitalWrite(MOTOR_R_C2,    HIGH);
+  digitalWrite(MOTOR_L_EN1,    HIGH);
+  digitalWrite(MOTOR_L_EN2,    HIGH);
+  digitalWrite(MOTOR_R_EN1,    HIGH);
+  digitalWrite(MOTOR_R_EN2,    HIGH);
   // speed is controlled by PWM (analog)
-  analogWrite(MOTOR_L_PWM, 0);
-  analogWrite(MOTOR_R_PWM, 0);
+  analogWrite(MOTOR_L_PWM1, 0);
+  analogWrite(MOTOR_L_PWM2, 0);
+  analogWrite(MOTOR_R_PWM1, 0);
+  analogWrite(MOTOR_R_PWM2, 0);
+
 }
 
 // Get relay from address
@@ -177,11 +185,11 @@ void readCommand(){
   // if not status command return command for confirmation
   if(command != 0){
     // output command for confirmation
-    Serial.print(command);
-    Serial.print(",");
-    Serial.print(address);
-    Serial.print(",");
-    Serial.println(value);
+    Serial1.print(command);
+    Serial1.print(",");
+    Serial1.print(address);
+    Serial1.print(",");
+    Serial1.println(value);
   }
 }
 
@@ -225,14 +233,15 @@ void getStatus(int item){
   }
   sprintf(output,"0,%d,%d",item,value);
   Serial.println(output);
+  Serial1.println(output);
 }
 
 
 void checkSerial(){
     // Reading incoming commands
-    while(Serial.available() > 0){
+    while(Serial1.available() > 0){
       // commands are comma seperated integers: command,address,value followed by newline (\n)
-      char inChar = (char)Serial.read();
+      char inChar = (char)Serial1.read();
       if(inChar != '\n'){
         inData[index] = inChar;
         index++;
