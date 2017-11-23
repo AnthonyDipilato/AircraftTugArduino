@@ -57,8 +57,9 @@ void Running::toggleRelay(int relay, boolean state){
 
 byte Running::getOutputValue(int value){
   float output;
-  if(value < -100){ value = -100;}
-  if(value > 100){ value = 100;}
+  // soften top angles from unintentionally turning we will round at 75%
+  if(value < -75){ value = -100;}
+  if(value > 75){ value = 100;} 
   value = abs(value);
   output = ((float) value / 100) * 255;
   return (byte) output;
@@ -77,7 +78,7 @@ void Running::setTargetSpeed(int address, int value){
   }
   if(address == MOTOR_R_ADDRESS){
     lastCommandR = currentTime;
-    targetSpeedR = value * -1;
+    targetSpeedR = value;
     Serial.print("New TargetR: ");
     Serial.println(targetSpeedR);
   }

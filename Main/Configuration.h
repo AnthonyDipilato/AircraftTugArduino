@@ -28,14 +28,14 @@
 
 // Motor Softening
 // Higher the number the slower the acceleration
-#define MOTOR_DELAY           100
-#define MOTOR_INCREMENT       10
+#define MOTOR_DELAY           50
+#define MOTOR_INCREMENT       5
 
 
 // Motor safety cuttoff
 // Time between commands to reset motors to 0
 // to prevent runaway tug on disconnect
-#define COMMAND_TIMEOUT       1500  // command intervals are 500 or on change so 3 missed intervals should be safe cutoff
+#define COMMAND_TIMEOUT       250  // command intervals are 500 or on change so 3 missed intervals should be safe cutoff
 
 // Horn timeout
 // horn works on momentary button timeout prevents sticky buttons on disconnect
