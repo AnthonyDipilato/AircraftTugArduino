@@ -18,10 +18,12 @@ Running::Running(){
   lightState    = false;
   strobeState   = false;
   hitchState    = false;
+  hitchCurrent  = false;
   currentSpeedR = 0;
   currentSpeedL = 0;
  }
 
+// for the wheel hitch method should only be called directly to unlock
 void Running::toggleRelay(int relay, boolean state){
   Serial.println("toggleRelay()");
   Serial.print("relay: ");
@@ -43,6 +45,7 @@ void Running::toggleRelay(int relay, boolean state){
       break;
     case(RELAY_HITCH):
       hitchState =  state;
+      hitchCurrent = state; 
       break;
   }
   if(state){
@@ -51,6 +54,18 @@ void Running::toggleRelay(int relay, boolean state){
   }else{
     Serial.println("OFF");
     digitalWrite(relay, HIGH); // HIGH is off
+  }
+}
+
+void Running::setHitch(bool state){
+  Serial.println("setHitch: true");
+  hitchState = state;
+}
+
+void Running::lockHitch(){
+  if(hitchState && !hitchCurrent){
+    digitalWrite(RELAY_HITCH, LOW); // LOW is on
+    hitchCurrent = true;
   }
 }
 

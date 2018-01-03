@@ -25,6 +25,8 @@ class Running
     void allStop();
     byte getOutputValue(int value);
     void motorLoop();
+    void lockHitch();
+    void setHitch(bool state);
 
     int currentSpeedL;
     int currentSpeedR;
@@ -36,6 +38,7 @@ class Running
     boolean lightState;
     boolean strobeState;
     boolean hitchState;
+    boolean hitchCurrent;
 
     unsigned long lastCommandL;
     unsigned long lastCommandR;

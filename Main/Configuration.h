@@ -31,6 +31,13 @@
 #define MOTOR_DELAY           50
 #define MOTOR_INCREMENT       5
 
+// Electromagnet Locks include reed switches
+// so we will use them to lock on contact 
+// This is a safety feature to keep them from slaming together
+#define MAG_LOCK_SWITCH_L     2
+#define MAG_LOCK_SWITCH_R     3
+
+
 
 // Motor safety cuttoff
 // Time between commands to reset motors to 0

@@ -25,13 +25,17 @@
 
 #include "Configuration.h"
 #include "Running.h"
+#include "Buttons.h"
 
 
 char inData[8];
 int index = 0;
 
-// setup running class
+// Setup running class
 Running running;
+// Setup switches for maglocks
+Buttons maglock_switch_l(MAG_LOCK_SWITCH_L);
+Buttons maglock_switch_r(MAG_LOCK_SWITCH_R);
 
 void setup()
 {
@@ -160,6 +164,10 @@ void readCommand(){
       if(relay == -1){
         break;
       }
+      else if(relay == RELAY_HITCH){
+        running.setHitch(true);
+        break;
+      }
       running.toggleRelay(relay, true);
       break;
     case(2): // Relay Off
@@ -247,8 +255,21 @@ void checkSerial(){
     }
 }
 
+// Check switch states
+void check_switches(){
+    // check staus of switches
+    maglock_switch_l.check();
+    maglock_switch_r.check();
+    // if both switches are closed lock the wheel hitch
+    if(maglock_switch_l && maglock_switch_r){
+      running.lockHitch();
+    }
+}
+
 void loop()
 {
+  // check switches
+  check_switches();
   // run loop
   running.loop_();
   // check for commands
