@@ -261,7 +261,7 @@ void check_switches(){
     maglock_switch_l.check();
     maglock_switch_r.check();
     // if both switches are closed lock the wheel hitch
-    if(maglock_switch_l && maglock_switch_r){
+    if(maglock_switch_l.value &&  maglock_switch_r.value){
       running.lockHitch();
     }
 }

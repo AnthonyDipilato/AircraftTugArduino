@@ -1,4 +1,6 @@
 # Aircraft Tug
+![Aircraft Tug](http://anthonydipilato.com/wp-content/uploads/2018/03/aircrafttug.jpg)
+
 This project is for the small aircraft tug that I built.
 You can see the build log and details at URL
 

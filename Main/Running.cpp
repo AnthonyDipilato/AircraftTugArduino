@@ -58,12 +58,18 @@ void Running::toggleRelay(int relay, boolean state){
 }
 
 void Running::setHitch(bool state){
-  Serial.println("setHitch: true");
+  Serial.print("setHitch: true");
   hitchState = state;
+  // if mag switch is disabled
+  if(!ENABLE_MAG_SWITCH){
+    digitalWrite(RELAY_HITCH, LOW);
+    hitchCurrent = true;
+  }
 }
 
 void Running::lockHitch(){
-  if(hitchState && !hitchCurrent){
+  // if how hitch is set to lock but not yet locked we will lock it 
+  if(hitchState && !hitchCurrent){ 
     digitalWrite(RELAY_HITCH, LOW); // LOW is on
     hitchCurrent = true;
   }
