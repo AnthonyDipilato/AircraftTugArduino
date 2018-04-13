@@ -256,7 +256,7 @@ void checkSerial(){
 }
 
 // Check switch states
-void check_switches(){
+void checkSwitches(){
     // check staus of switches
     maglock_switch_l.check();
     maglock_switch_r.check();
@@ -269,7 +269,7 @@ void check_switches(){
 void loop()
 {
   // check switches
-  check_switches();
+  checkSwitches();
   // run loop
   running.loop_();
   // check for commands
