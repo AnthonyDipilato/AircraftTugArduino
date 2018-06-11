@@ -2,7 +2,7 @@
 ![Aircraft Tug](http://anthonydipilato.com/wp-content/uploads/2018/03/aircrafttug.jpg)
 
 This project is for the small aircraft tug that I built.
-You can see the build log and details at URL
+You can see the build log and details at [http://anthonydipilato.com/2018/06/08/aircraft-tug/](http://anthonydipilato.com/2018/06/08/aircraft-tug/)
 
 The arduino acts as slave to the iOS app. The source for the app can be found at [https://github.com/AnthonyDipilato/AircraftTugIOS](https://github.com/AnthonyDipilato/AircraftTugIOS)
 
